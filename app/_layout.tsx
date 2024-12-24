@@ -20,23 +20,23 @@ const RootLayout = () => {
 
 // This component handles the initial routing
 function InitialLayout() {
-  const { isLoaded, isSignedIn } = useAuth();
-  const segments = useSegments();
-  const router = useRouter();
+  // const { isLoaded, isSignedIn } = useAuth();
+  // const segments = useSegments();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (!isLoaded) return;
+  // useEffect(() => {
+  //   if (!isLoaded) return;
 
-    const inTabsGroup = segments[0] === '(tabs)';
+  //   const inTabsGroup = segments[0] === '(tabs)';
 
-    if (isSignedIn && !inTabsGroup) {
-      // Redirect signed in users to the home page
-      router.replace('/(tabs)/home');
-    } else if (!isSignedIn) {
-      // Redirect signed out users to the sign in page
-      router.replace('/');
-    }
-  }, [isSignedIn, segments]);
+  //   if (isSignedIn && !inTabsGroup) {
+  //     // Redirect signed in users to the home page
+  //     router.replace('/(tabs)/home');
+  //   } else if (!isSignedIn) {
+  //     // Redirect signed out users to the sign in page
+  //     router.replace('/');
+  //   }
+  // }, [isSignedIn, segments]);
 
   return <Slot />;
 }
