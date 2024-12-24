@@ -5,10 +5,16 @@ import Booking from '../Screens/BookingScreen/Booking';
 import Profile from '../Screens/ProfileScreen/Profile';
 const Tab = createBottomTabNavigator();
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Colors from '@/constants/Colors';
 
 const TabsNav = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: Colors.PRIMARY
+            }}
+        >
             <Tab.Screen
                 options={{
                     tabBarLabel: ({ color }) => (
