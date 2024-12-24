@@ -1,6 +1,7 @@
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import GlobalApi from '@/app/utils/GlobalApi';
+import Heading from '@/app/Components/Heading';
 
 interface SliderResponse {
     sliders: any[];
@@ -15,13 +16,13 @@ export default function Slider() {
     const getSliders = () => {
         GlobalApi.getSlider().then((res: unknown) => {
             const sliderResponse = res as SliderResponse;
-            setSlider(sliderResponse.sliders);
+            setSlider(sliderResponse?.sliders);
         });
     };
 
     return (
         <View>
-            <Text style={styles.heading}>Latest Offers</Text>
+            <Heading text="Latest Offers" />
             <FlatList
                 data={slider}
                 horizontal={true}
@@ -40,11 +41,6 @@ export default function Slider() {
 }
 
 const styles = StyleSheet.create({
-    heading: {
-        fontSize: 20,
-        fontFamily: 'outfit-medium',
-        marginBottom: 10
-    },
     sliderImage: {
         width: 270,
         height: 150,
