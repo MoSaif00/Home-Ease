@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./Screens/LoginScreen/Login";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import { StatusBar } from "expo-status-bar";
+import TabsNav from "./Navigation/TabsNav";
 
 export default function Index() {
   return (
@@ -9,7 +10,7 @@ export default function Index() {
       style={styles.container}
     >
       <SignedIn>
-        <Text>You are signed in </Text>
+        <TabsNav />
       </SignedIn>
       <SignedOut>
         <Login />
