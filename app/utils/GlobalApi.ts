@@ -118,10 +118,41 @@ const  result = await request(MASTER_URL!, mutationQuery)
 return result
 }
 
+const getUserBookings=async (userEmail: string)=>{
+
+    const query = gql`
+        query GetUserBookings {
+        bookings(orderBy: updatedAt_DESC, where: {userEmail: "`+userEmail+`"}) {
+            date
+            notes
+            time
+            userEmail
+            userName
+            bookingStatus
+            id
+            business {
+                id
+                images {
+                    url
+                }
+                name
+                address
+                email
+                contactPerson
+                about
+            }
+        }
+    }
+    `
+const  result = await request(MASTER_URL!, query)
+return result
+}
+
 export default{
     getSlider,
     getCategories,
     getBusinessList,
     getBusinessListByCategory,
-    createBooking
+    createBooking,
+    getUserBookings
 }
