@@ -1,17 +1,13 @@
-
-
-
-
 export default {
-    BLACK: '#000000',
-    WHITE: '#ffffff',
-    PRIMARY: '#8E3FFF',
-    GRAY: '#A0A0A0',
-    LIGHT_GRAY:'#EDEDED',
-    LIGHT_PRIMARY:'#F0E7FF',
-    PRIMARY_LIGHT:'#D8C9FF',
-    RED:'#FF0000',
-    LIGHT_RED:'#FFEBEB',
-    GREEN:'#00FF00',
-    LIGHT_GREEN:'#E8FFE8',
+    BLACK: '#1A1A1A',          // Softer black
+    WHITE: '#FFFFFF',
+    PRIMARY: '#4A6FA5',        // Modern blue
+    GRAY: '#6B7280',          // Neutral gray
+    LIGHT_GRAY: '#F3F4F6',    // Lighter background
+    LIGHT_PRIMARY: '#E2E8F0',  // Light blue tint
+    PRIMARY_LIGHT: '#93C5FD',  // Soft blue
+    RED: '#EF4444',           // Softer red
+    LIGHT_RED: '#FEE2E2',     // Light red background
+    GREEN: '#10B981',         // Modern green
+    LIGHT_GREEN: '#D1FAE5',   // Light green background
 }

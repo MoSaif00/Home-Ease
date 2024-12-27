@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     categoryContainer: {
         backgroundColor: Colors.LIGHT_GRAY,
         padding: 17,
-        borderRadius: 99
+        borderRadius: 99,
     },
     categoryIcon: {
         width: 30,
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     },
     categoryTitle: {
         fontFamily: 'outfit-medium',
-        marginTop: 5
+        marginTop: 0,
+        textAlign: 'center'
     }
 });

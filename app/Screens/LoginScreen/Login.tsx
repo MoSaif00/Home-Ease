@@ -45,12 +45,12 @@ export default function Login() {
             />
             <View style={styles.subContainer}>
                 <Text style={styles.headerText}>
-                    Let's Find <Text style={styles.boldText}>
-                        Professional Cleaning and Repair
-                    </Text> Services
+                    Discover Expert <Text style={styles.boldText}>
+                        Home Care & Maintenance
+                    </Text> Solutions
                 </Text>
                 <Text style={styles.subText}>
-                    Best App to find services near you which deliver professional service
+                    Your trusted platform for verified local professionals delivering quality services
                 </Text>
 
                 <TouchableOpacity

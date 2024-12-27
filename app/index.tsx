@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Login from "./Screens/LoginScreen/Login";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import { StatusBar } from "expo-status-bar";
@@ -35,6 +35,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 28,
+    paddingTop: 20,
   }
 });

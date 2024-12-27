@@ -28,7 +28,7 @@ export default function Slider() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item, index }) => (
-                    <View style={{ marginRight: 20 }}>
+                    <View style={{ marginRight: 10 }}>
                         <Image
                             source={{ uri: item?.image?.url }}
                             style={styles.sliderImage}
@@ -42,9 +42,9 @@ export default function Slider() {
 
 const styles = StyleSheet.create({
     sliderImage: {
-        width: 270,
+        width: 230,
         height: 150,
         borderRadius: 20,
-        objectFit: 'contain'
+        objectFit: 'fill'
     }
 });
