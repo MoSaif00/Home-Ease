@@ -188,6 +188,7 @@ export default function BusinessDetails() {
                 visible={isShowModal}
             >
                 <BookingModal
+                    businessId={business?.id}
                     closeModal={() => setIsShowModal(false)}
                 />
 

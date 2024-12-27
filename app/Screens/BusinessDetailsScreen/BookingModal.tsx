@@ -1,22 +1,25 @@
-import { FlatList, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import ScreenHeading from '@/app/Components/ScreenHeading';
 import CalendarPicker from 'react-native-calendar-picker';
 import Colors from '@/constants/Colors';
 import Heading from '@/app/Components/Heading';
 import { useEffect, useState } from 'react';
+import GlobalApi from '@/app/utils/GlobalApi';
+import { useUser } from '@clerk/clerk-expo';
 
 
 type BookingModalProps = {
-
+    businessId: string;
     closeModal: () => void;
 
 };
 
-export default function BookingModal({ closeModal }: BookingModalProps) {
+export default function BookingModal({ businessId, closeModal }: BookingModalProps) {
     const [timeList, setTimeList] = useState<any[]>([]);
     const [selectedTime, setSelectedTime] = useState<string>('');
     const [selectedDate, setSelectedDate] = useState<string>('');
     const [notes, setNotes] = useState<string>('');
+    const { user } = useUser();
 
     useEffect(() => {
         getTime();
@@ -52,6 +55,29 @@ export default function BookingModal({ closeModal }: BookingModalProps) {
         setTimeList(timeList);
     };
 
+    const createNewBooking = () => {
+        if (!selectedDate || !selectedTime) {
+            ToastAndroid.show('Please select date and time', ToastAndroid.LONG);
+            return;
+        }
+
+        const data = {
+            businessId: businessId,
+            date: new Date(selectedDate).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }).replace(/ /g, '-'),
+            time: selectedTime,
+            userEmail: user?.primaryEmailAddress?.emailAddress || '',
+            userName: user?.fullName || '',
+            notes: notes
+        };
+        GlobalApi.createBooking(data).then((res) => {
+            ToastAndroid.show('Booking created successfully', ToastAndroid.LONG);
+            closeModal();
+        });
+    };
 
     return (
         <ScrollView>
@@ -112,7 +138,10 @@ export default function BookingModal({ closeModal }: BookingModalProps) {
                     />
                 </View>
 
-                <TouchableOpacity style={{ marginTop: 20 }}>
+                <TouchableOpacity
+                    style={{ marginTop: 20 }}
+                    onPress={() => createNewBooking()}
+                >
                     <Text style={styles.confirmBtn}>Confirm Booking</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
