@@ -1,36 +1,48 @@
 import * as WebBrowser from 'expo-web-browser';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import loginImage from '../../../assets/images/login.png';
 import Colors from '@/constants/Colors';
 import { useWarmUpBrowser } from '@/app/hooks/useWarmUpBrowser';
 import { useCallback } from 'react';
+import * as Linking from 'expo-linking';
 import { useOAuth } from '@clerk/clerk-expo';
 
 WebBrowser.maybeCompleteAuthSession();
 
+
 export default function Login() {
     useWarmUpBrowser();
-    const router = useRouter();
+
     const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' });
 
     const onPress = useCallback(async () => {
         try {
-            const { createdSessionId, setActive } = await startOAuthFlow();
+            const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
+                redirectUrl: Linking.createURL('/', { scheme: 'myapp' }),
+            });
 
+            // If sign in was successful, set the active session
             if (createdSessionId) {
-                await setActive!({ session: createdSessionId });
-                // Navigate to index (main entry point)
-                router.replace('/');
+                setActive!({ session: createdSessionId });
+            } else {
+                // Use signIn or signUp returned from startOAuthFlow
+                // for next steps, such as MFA
             }
         } catch (err) {
+            // See https://clerk.com/docs/custom-flows/error-handling
+            // for more info on error handling
             console.error(JSON.stringify(err, null, 2));
         }
     }, []);
 
+
+
     return (
         <View style={styles.container}>
-            <Image source={loginImage} style={styles.loginImage} />
+            <Image
+                source={loginImage}
+                style={styles.loginImage}
+            />
             <View style={styles.subContainer}>
                 <Text style={styles.headerText}>
                     Let's Find <Text style={styles.boldText}>
@@ -41,9 +53,15 @@ export default function Login() {
                     Best App to find services near you which deliver professional service
                 </Text>
 
-                <TouchableOpacity style={styles.button} onPress={onPress}>
-                    <Text style={styles.buttonText}>Let's Get Started</Text>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={onPress}
+                >
+                    <Text style={styles.buttonText}>
+                        Let's Get Started
+                    </Text>
                 </TouchableOpacity>
+
             </View>
         </View>
     );
@@ -90,6 +108,10 @@ const styles = StyleSheet.create({
         borderRadius: 99,
         marginTop: 40
     },
+    // googleButton: {
+    //     backgroundColor: '#4285F4',
+    //     marginTop: 10
+    // },
     buttonText: {
         textAlign: 'center',
         fontSize: 17,
