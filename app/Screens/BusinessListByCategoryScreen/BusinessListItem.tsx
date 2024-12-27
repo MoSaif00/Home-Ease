@@ -1,7 +1,13 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+    BusinessDetails: { business: Business; };
+};
 
 interface Business {
     name: string;
@@ -11,8 +17,16 @@ interface Business {
 }
 
 export default function BusinessListItem({ business }: { business: Business; }) {
+
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     return (
-        <View style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={() => navigation.navigate('BusinessDetails', {
+                business: business
+            })}
+
+        >
             <Image
                 source={{ uri: business?.images?.[0]?.url }}
                 style={styles.businessImage}
@@ -43,7 +57,7 @@ export default function BusinessListItem({ business }: { business: Business; }) 
                 </Text>
             </View>
 
-        </View>
+        </TouchableOpacity>
     );
 }
 

@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import GlobalApi from '@/app/utils/GlobalApi';
 import BusinessListItem from './BusinessListItem';
 import Colors from '@/constants/Colors';
+import ScreenHeading from '@/app/Components/ScreenHeading';
 
 type BusinessListRes = {
     businesses: any[];
@@ -33,23 +34,12 @@ export default function BusinessListByCategory() {
 
     return (
         <View style={{ padding: 20, paddingTop: 30 }}>
-            <TouchableOpacity
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: 10,
-                    alignItems: 'center'
-                }}
-                onPress={() => navigation.goBack()}
-            >
-                <Ionicons name="arrow-back" size={30} color="black" />
-                <Text
-                    style={{
-                        fontSize: 25,
-                        fontFamily: 'outfit-medium',
-                    }}
-                >{param?.category}</Text>
-            </TouchableOpacity>
+            <ScreenHeading
+                title={param?.category}
+                iconColor={Colors.BLACK}
+                iconSize={30}
+                handleOnPress={() => navigation.goBack()}
+            />
             {businessList?.length > 0
                 ? <FlatList
                     data={businessList}
