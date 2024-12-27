@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
-import Booking from '../Screens/BookingScreen/Booking';
 import Profile from '../Screens/ProfileScreen/Profile';
 const Tab = createBottomTabNavigator();
 import FontAwesome from '@expo/vector-icons/FontAwesome';

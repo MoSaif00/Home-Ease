@@ -1,5 +1,4 @@
 import Colors from '@/constants/Colors';
-import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface HeadingProps {

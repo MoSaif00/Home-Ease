@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native';
 import Home from '../Screens/HomeScreen/Home';
 import BusinessListByCategory from '../Screens/BusinessListByCategoryScreen/BusinessListByCategory';
 import BusinessDetails from '../Screens/BusinessDetailsScreen/BusinessDetails';

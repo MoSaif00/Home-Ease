@@ -1,7 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { FlatList, Text, View } from 'react-native';
 import GlobalApi from '@/app/utils/GlobalApi';
 import BusinessListItem from './BusinessListItem';
 import Colors from '@/constants/Colors';

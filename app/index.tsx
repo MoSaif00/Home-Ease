@@ -35,6 +35,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 28, // Adjust later according to screen optimal heights
+    paddingTop: 28,
   }
 });

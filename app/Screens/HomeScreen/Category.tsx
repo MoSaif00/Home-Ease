@@ -72,7 +72,6 @@ export default function Category() {
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        // paddingRight: 10
     },
     categoriesContainer: {
         flex: 1,

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import { FlatList, StyleSheet, View, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import GlobalApi from '@/app/utils/GlobalApi';
 import Heading from '@/app/Components/Heading';

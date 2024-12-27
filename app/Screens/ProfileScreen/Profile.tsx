@@ -1,4 +1,4 @@
-import { FlatList, Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useUser, useAuth } from '@clerk/clerk-expo';
 import Colors from '@/constants/Colors';
