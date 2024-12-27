@@ -1,7 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '@/constants/Colors';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
+type RootStackParamList = {
+    BusinessDetails: { business: Business; };
+};
 
 interface Business {
     name: string;
@@ -18,9 +23,16 @@ interface Booking {
     bookingStatus: string;
 }
 export default function BookingListItem({ booking, business }: { booking: Booking; business: Business; }) {
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     return (
-        <View style={styles.container} >
+        <TouchableOpacity
+            style={styles.container}
+            onPress={() => navigation.navigate('BusinessDetails', {
+                business: business
+            })}
+
+        >
             <Image
                 source={{ uri: business?.images?.[0]?.url }}
                 style={styles.businessImage}
@@ -76,7 +88,7 @@ export default function BookingListItem({ booking, business }: { booking: Bookin
                 </Text> : null}
             </View>
 
-        </View>
+        </TouchableOpacity>
     );
 }
 

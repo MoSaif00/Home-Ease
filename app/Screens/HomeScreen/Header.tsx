@@ -1,11 +1,14 @@
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useUser } from '@clerk/clerk-expo';
 import Colors from '@/constants/Colors';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header() {
     const { user } = useUser();
+
+    const navigate = useNavigation<any>();
 
     return user && (
         <View style={styles.container}>
@@ -34,7 +37,12 @@ export default function Header() {
                         </Text>
                     </View>
                 </View>
-                <FontAwesome name="book" size={27} color={Colors.WHITE} />
+                <TouchableOpacity
+                    onPress={() => navigate.navigate('Booking')}
+                >
+
+                    <FontAwesome name="book" size={27} color={Colors.WHITE} />
+                </TouchableOpacity>
             </View>
             <View style={styles.searchContainer}>
                 <TextInput

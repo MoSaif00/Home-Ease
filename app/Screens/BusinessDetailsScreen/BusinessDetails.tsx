@@ -1,5 +1,5 @@
-import { FlatList, Image, Modal, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
-import { useEffect, useState } from 'react';
+import { FlatList, Image, Linking, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Colors from '@/constants/Colors';
@@ -22,183 +22,106 @@ export default function BusinessDetails() {
     const [isReadMore, setIsReadMore] = useState<boolean>(false);
     const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-    useEffect(() => {
-    }, []);
+    const onMessageBtnClick = () => {
+        Linking.openURL('mailto:' + business?.email + "?subject= I am interested in your service &body=Hello there, I am interested in your service. Please provide me more details.");
+    };
 
-    return (
-        <View style={{ height: '98%' }}>
+    const renderHeader = () => (
+        <View>
+            <ScreenHeading
+                iconColor={Colors.WHITE}
+                style={styles.backButton}
+                handleOnPress={() => navigation.goBack()}
+            />
 
-            <ScrollView>
-                <ScreenHeading
-                    iconColor={Colors.WHITE}
-                    style={styles.backButton}
-                    handleOnPress={() => navigation.goBack()}
-                />
+            <Image
+                source={{ uri: business?.images?.[0]?.url }}
+                style={styles.businessImage}
+            />
 
-                <TouchableOpacity
-                    style={styles.backButton}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Ionicons name="arrow-back" size={30} color="white" />
+            <View style={styles.infoContainer}>
+                <Text style={styles.nameText}>{business?.name}</Text>
+                <View style={styles.subContainer}>
+                    <Text style={styles.contactText}>{business?.contactPerson} ✨</Text>
+                    <Text style={styles.categoryText}>{business?.category?.name}</Text>
+                </View>
+                <Text style={styles.addressText}>
+                    <Ionicons name="location-sharp" size={20} color={Colors.PRIMARY} />
+                    {business?.address}
+                </Text>
 
-                </TouchableOpacity>
-                <Image
-                    source={{ uri: business?.images?.[0]?.url }}
-                    style={styles.businessImage}
-                />
+                <View style={styles.divider} />
 
-                <View style={styles.infoContainer}>
+                <View>
+                    <Heading text="About Me" />
                     <Text
-                        style={{
-                            fontSize: 25,
-                            fontFamily: 'outfit-bold',
-                        }}
-                    >{business?.name}</Text>
-                    <View style={styles.subContainer}>
-                        <Text
-                            style={{
-                                fontSize: 20,
-                                fontFamily: 'outfit-medium',
-                                color: Colors.PRIMARY
-                            }}
-                        >{business?.contactPerson} ✨</Text>
-                        <Text
-                            style={{
-                                fontSize: 14,
-                                color: Colors.PRIMARY,
-                                backgroundColor: Colors.LIGHT_PRIMARY,
-                                padding: 5,
-                                borderRadius: 5,
-                            }}
-                        >{business?.category?.name}</Text>
-                    </View>
-                    <Text style={{ fontSize: 17, fontFamily: 'outfit', color: Colors.GRAY }}>
-                        <Ionicons name="location-sharp" size={20} color={Colors.PRIMARY} />
-                        {business?.address}
+                        style={styles.aboutText}
+                        numberOfLines={!isReadMore ? 5 : undefined}
+                    >
+                        {business?.about}
                     </Text>
-
-                    <View
-                        style={{
-                            borderWidth: 0.4,
-                            borderColor: Colors.GRAY,
-                            marginTop: 20,
-                            marginBottom: 20
-                        }}>
-                    </View>
-                    <View>
-                        <Heading
-                            text={"About Me"}
-                        />
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                fontFamily: 'outfit',
-                                color: Colors.GRAY,
-                                lineHeight: 28
-                            }}
-                            numberOfLines={!isReadMore ? 5 : undefined}
-                        >
-                            {business?.about}
+                    <TouchableOpacity onPress={() => setIsReadMore(!isReadMore)}>
+                        <Text style={styles.readMoreText}>
+                            {isReadMore ? 'Read less' : 'Read more'}
                         </Text>
-                        <TouchableOpacity
-                            onPress={() => setIsReadMore(!isReadMore)}
-                        >
-
-                            <Text
-                                style={{
-                                    fontSize: 16,
-                                    fontFamily: 'outfit',
-                                    color: Colors.PRIMARY,
-                                }}
-                            >{isReadMore ? 'Read less' : 'Read more'}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style={{
-                            borderWidth: 0.4,
-                            borderColor: Colors.GRAY,
-                            marginTop: 20,
-                            marginBottom: 20
-                        }}>
-                    </View>
-
-                    <View>
-                        <Heading
-                            text={"Photos"}
-                        />
-                        <FlatList
-                            data={business?.images}
-                            numColumns={2}
-                            renderItem={({ item }) => (
-                                <Image
-                                    source={{ uri: item?.url }}
-                                    style={{
-                                        width: '50%',
-                                        flex: 1,
-                                        height: 120,
-                                        borderRadius: 15,
-                                        margin: 7
-                                    }}
-                                />
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
-            </ScrollView>
+                <View style={styles.divider} />
+                <Heading text="Photos" />
+            </View>
+        </View>
+    );
 
-            <View
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    margin: 8,
-                    gap: 8
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={business?.images}
+                numColumns={2}
+                ListHeaderComponent={renderHeader}
+                renderItem={({ item }) => (
+                    <Image
+                        source={{ uri: item?.url }}
+                        style={styles.gridImage}
+                    />
+                )}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={styles.listContainer}
+            />
 
-                }}
-            >
+            <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     style={styles.messageBtn}
+                    onPress={onMessageBtnClick}
                 >
-                    <Text
-                        style={{
-                            textAlign: 'center',
-                            fontFamily: 'outfit-medium',
-                            color: Colors.PRIMARY,
-                            fontSize: 18
-                        }}
-                    >Message</Text>
+                    <Text style={styles.messageBtnText}>Message</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.bookingBtn}
                     onPress={() => setIsShowModal(true)}
                 >
-                    <Text
-                        style={{
-                            textAlign: 'center',
-                            fontFamily: 'outfit-medium',
-                            color: Colors.WHITE,
-                            fontSize: 18
-                        }}
-                    >Book Now</Text>
+                    <Text style={styles.bookingBtnText}>Book Now</Text>
                 </TouchableOpacity>
             </View>
-            <Modal
-                animationType='slide'
-                visible={isShowModal}
-            >
+
+            <Modal animationType='slide' visible={isShowModal}>
                 <BookingModal
                     businessId={business?.id}
                     closeModal={() => setIsShowModal(false)}
                 />
-
             </Modal>
         </View>
-
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '98%'
+    },
+    listContainer: {
+        flexGrow: 1,
+        paddingBottom: 80
+    },
     backButton: {
         position: 'absolute',
         zIndex: 12,
@@ -206,11 +129,9 @@ const styles = StyleSheet.create({
     },
     infoContainer: {
         padding: 20,
-        display: 'flex',
         gap: 7
     },
     subContainer: {
-        display: 'flex',
         flexDirection: 'row',
         gap: 5,
         alignItems: 'center'
@@ -218,6 +139,59 @@ const styles = StyleSheet.create({
     businessImage: {
         width: '100%',
         height: 300,
+    },
+    nameText: {
+        fontSize: 25,
+        fontFamily: 'outfit-bold',
+    },
+    contactText: {
+        fontSize: 20,
+        fontFamily: 'outfit-medium',
+        color: Colors.PRIMARY
+    },
+    categoryText: {
+        fontSize: 14,
+        color: Colors.PRIMARY,
+        backgroundColor: Colors.LIGHT_PRIMARY,
+        padding: 5,
+        borderRadius: 5,
+    },
+    addressText: {
+        fontSize: 17,
+        fontFamily: 'outfit',
+        color: Colors.GRAY
+    },
+    divider: {
+        borderWidth: 0.4,
+        borderColor: Colors.GRAY,
+        marginVertical: 20
+    },
+    aboutText: {
+        fontSize: 16,
+        fontFamily: 'outfit',
+        color: Colors.GRAY,
+        lineHeight: 28
+    },
+    readMoreText: {
+        fontSize: 16,
+        fontFamily: 'outfit',
+        color: Colors.PRIMARY,
+    },
+    gridImage: {
+        width: '50%',
+        flex: 1,
+        height: 120,
+        borderRadius: 15,
+        margin: 7
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        margin: 8,
+        gap: 8,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
     },
     messageBtn: {
         padding: 15,
@@ -227,6 +201,12 @@ const styles = StyleSheet.create({
         borderRadius: 99,
         flex: 1
     },
+    messageBtnText: {
+        textAlign: 'center',
+        fontFamily: 'outfit-medium',
+        color: Colors.PRIMARY,
+        fontSize: 18
+    },
     bookingBtn: {
         padding: 15,
         backgroundColor: Colors.PRIMARY,
@@ -235,4 +215,10 @@ const styles = StyleSheet.create({
         borderRadius: 99,
         flex: 1
     },
-});;
+    bookingBtnText: {
+        textAlign: 'center',
+        fontFamily: 'outfit-medium',
+        color: Colors.WHITE,
+        fontSize: 18
+    }
+});

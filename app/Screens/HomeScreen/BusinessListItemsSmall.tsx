@@ -1,6 +1,12 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Colors from '@/constants/Colors';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+    BusinessDetails: { business: Business; };
+};
 
 interface Business {
     name?: string;
@@ -14,8 +20,15 @@ interface Business {
 }
 
 export default function BusinessListItemsSmall({ business }: { business: Business; }) {
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     return (
-        <View style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={() => navigation.navigate(
+                'BusinessDetails',
+                { business: business }
+            )}
+        >
             <Image
                 source={{ uri: business?.images?.[0]?.url }}
                 style={styles.businessImage}
@@ -49,7 +62,7 @@ export default function BusinessListItemsSmall({ business }: { business: Busines
                 >{business?.category?.name}</Text>
 
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 

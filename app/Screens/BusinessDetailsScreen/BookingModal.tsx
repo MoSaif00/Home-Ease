@@ -81,7 +81,6 @@ export default function BookingModal({ businessId, closeModal }: BookingModalPro
 
     return (
         <ScrollView>
-
             <KeyboardAvoidingView style={{ padding: 20 }}>
                 <ScreenHeading
                     title="Booking"
