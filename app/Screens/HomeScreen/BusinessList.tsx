@@ -23,7 +23,7 @@ export default function BusinessList() {
     return (
         <View style={{ marginTop: 20 }}>
             <Heading
-                text={"Freelancers"}
+                text={"Popular Businesses"}
                 isViewAll={true}
             />
             <FlatList

@@ -3,7 +3,13 @@ import React, { useEffect, useState } from 'react';
 import GlobalApi from '@/app/utils/GlobalApi';
 import Heading from '@/app/Components/Heading';
 import Colors from '@/constants/Colors';
+import { useNavigation } from '@react-navigation/native';
 
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+    BusinessList: { category: string; };
+};
 interface CategoriesResponse {
     categories: any[];
 }
@@ -11,6 +17,7 @@ interface CategoriesResponse {
 export default function Category() {
     const [categories, setCategories] = useState<any[]>([]);
     const [showAll, setShowAll] = useState(false);
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         getCategories();
@@ -41,7 +48,12 @@ export default function Category() {
                 data={displayedCategories}
                 numColumns={4}
                 renderItem={({ item }) => (
-                    <View style={styles.categoriesContainer}>
+                    <TouchableOpacity
+                        style={styles.categoriesContainer}
+                        onPress={() => navigation.navigate('BusinessList', {
+                            category: item.name
+                        })}
+                    >
                         <View style={styles.categoryContainer}>
                             <Image
                                 source={{ uri: item?.icon?.url }}
@@ -49,7 +61,7 @@ export default function Category() {
                             />
                         </View>
                         <Text style={styles.categoryTitle}>{item?.name}</Text>
-                    </View>
+                    </TouchableOpacity>
                 )}
                 keyExtractor={(item, index) => index.toString()}
             />

@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
-import Home from '../Screens/HomeScreen/Home';
 import Booking from '../Screens/BookingScreen/Booking';
 import Profile from '../Screens/ProfileScreen/Profile';
 const Tab = createBottomTabNavigator();
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Colors from '@/constants/Colors';
+import HomeNavigation from './HomeNavigation';
 
 const TabsNav = () => {
     return (
@@ -33,7 +33,7 @@ const TabsNav = () => {
                         <FontAwesome name="home" size={size} color={color} />
                     )
                 }}
-                name="Home" component={Home} />
+                name="Home" component={HomeNavigation} />
             <Tab.Screen
                 options={{
                     tabBarLabel: ({ color }) => (
