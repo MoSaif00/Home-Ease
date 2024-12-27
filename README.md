@@ -4,12 +4,12 @@ HomeEase Pro connects users with verified professional cleaning and repair servi
 
 ## App Preview
 
-<div style="display: flex; justify-content: space-between;">
-    <img src="./assets/showoff/Login.png" width="25%" alt="Login Screen"/>
-    <img src="./assets/showoff/Home.png" width="25%" alt="Home Screen"/>
-    <img src="./assets/showoff/NewBooking.png" width="25%" alt="Booking Flow"/>
-    <img src="./assets/showoff/Bookings.png" width="25%" alt="My Booking Screen"/>
-</div>
+Here's the markdown code for the table format that you can use in your GitHub README.md:
+markdownCopy# App Preview
+
+|                    Login Screen                    |                    Home Screen                    |                      Booking Flow                       |                      My Bookings                      |
+| :------------------------------------------------: | :-----------------------------------------------: | :-----------------------------------------------------: | :---------------------------------------------------: |
+| <img src="./assets/showoff/Login.png" width="200"> | <img src="./assets/showoff/Home.png" width="200"> | <img src="./assets/showoff/NewBooking.png" width="200"> | <img src="./assets/showoff/Bookings.png" width="200"> |
 
 ## Tech Stack
 
