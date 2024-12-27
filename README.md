@@ -5,10 +5,10 @@ HomeEase Pro connects users with verified professional cleaning and repair servi
 ## App Preview
 
 <div style="display: flex; justify-content: space-between;">
-    <img src="./assets/showoff/Login.png" width="25%" alt="Login Screen"/>
-    <img src="./assets/showoff/Home.png" width="25%" alt="Home Screen"/>
-    <img src="./assets/showoff/NewBooking.png" width="25%" alt="Booking Flow"/>
-    <img src="./assets/showoff/Bookings.png" width="25%" alt="My Booking Screen"/>
+    <img src="./assets/showoff/Login.png" width="20%" alt="Login Screen"/>
+    <img src="./assets/showoff/Home.png" width="20%" alt="Home Screen"/>
+    <img src="./assets/showoff/NewBooking.png" width="20%" alt="Booking Flow"/>
+    <img src="./assets/showoff/Bookings.png" width="20%" alt="My Booking Screen"/>
 </div>
 
 ## Tech Stack
