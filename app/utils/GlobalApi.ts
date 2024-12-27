@@ -10,7 +10,7 @@ const getSlider=async ()=>{
                 id
                 name
                 image {
-                url
+                    url
                 }
             }
         }
@@ -22,12 +22,36 @@ return result
 const getCategories=async ()=>{
 
     const query = gql`
-        query MyQuery {
+        query GetCategory {
             categories {
                 id
                 name
                 icon {
-                url
+                    url
+                }
+            }
+        }
+    `
+const  result = await request(MASTER_URL!, query)
+return result
+}
+
+const getBusinessList=async ()=>{
+
+    const query = gql`
+        query GetBusinessList {
+            businesses {
+                id
+                name
+                email
+                contactPerson
+                category {
+                    name
+                }
+                address
+                about
+                images {
+                    url
                 }
             }
         }
@@ -38,5 +62,6 @@ return result
 
 export default{
     getSlider,
-    getCategories
+    getCategories,
+    getBusinessList
 }

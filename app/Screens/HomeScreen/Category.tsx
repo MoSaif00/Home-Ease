@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     },
     categoriesContainer: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     },
     categoryContainer: {
         backgroundColor: Colors.LIGHT_GRAY,

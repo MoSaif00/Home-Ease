@@ -12,8 +12,6 @@ interface HeadingProps {
 export default function Heading(
     { text, isViewAll = false, isViewLess = false, handleOnPress }: HeadingProps
 ) {
-    console.log("🚀 ~ isViewLess:", isViewLess);
-    console.log("🚀 ~ isViewAll:", isViewAll);
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>{text}</Text>
